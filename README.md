@@ -20,13 +20,34 @@ Metric-Compass/
 │   └── sim_study.R         # 몬테카를로 시뮬레이션 (제1종 오류율 및 검정력 검증)
 └── analysis/
     └── case_study.R        # 경기교육종단연구 데이터를 활용한 실증 분석 예시
-✨ 주요 기능 (Key Features)1. 탐지변수 가정 검정 (Tetrad Test)탐지변수(예: 수학, 영어 점수)가 결과변수(예: 국어 점수)의 잠재적 교란 요인을 적절히 반영하고 있는지 통계적으로 검정합니다.특징: lavaan 등 무거운 패키지 의존성 없이 Base R로 구현되어 가볍고 빠릅니다.보정: 다중 비교 문제 해결을 위한 P값 보정(Bonferroni, Holm 등)을 지원합니다.2. 교정된 이중차분법 (Adjusted DID Estimation)공통추세 가정이 위배되는 상황에서, 검증된 탐지변수를 활용하여 편향을 제거한 처치 효과를 추정합니다.🚀 사용 방법 (Usage)1. 환경 설정 및 함수 로드R# 필수 패키지 설치 (데이터 핸들링 및 시뮬레이션용)
+
+
+✨ 주요 기능 (Key Features)
+
+1. 탐지변수 가정 검정 (Tetrad Test)탐지변수(예: 수학, 영어 점수)가 결과변수(예: 국어 점수)의 잠재적 교란 요인을 적절히 반영하고 있는지 통계적으로 검정합니다.특징: lavaan 등 무거운 패키지 의존성 없이 Base R로 구현되어 가볍고 빠릅니다.보정: 다중 비교 문제 해결을 위한 P값 보정(Bonferroni, Holm 등)을 지원합니다.
+
+2. 교정된 이중차분법 (Adjusted DID Estimation)
+공통추세 가정이 위배되는 상황에서, 검증된 탐지변수를 활용하여 편향을 제거한 처치 효과를 추정합니다.
+
+🚀 사용 방법 (Usage)
+
+1. 환경 설정 및 함수 로드
+
+# 필수 패키지 설치 (데이터 핸들링 및 시뮬레이션용)
 if (!require("MASS")) install.packages("MASS")
 if (!require("dplyr")) install.packages("dplyr")
 
 # 핵심 함수 로드
 source("R/functions.R")
-2. 탐지변수 가정 검정 (Tetrad Test)사전점수(P), 사후점수(Y), 그리고 두 개의 탐지변수(C1, C2) 간의 관계를 검정합니다.R# 데이터와 변수명을 지정하여 실행
+
+# 핵심 함수 로드
+source("R/functions.R")
+
+
+2. 탐지변수 가정 검정 (Tetrad Test)
+사전점수(P), 사후점수(Y), 그리고 두 개의 탐지변수(C1, C2) 간의 관계를 검정합니다.
+
+# 데이터와 변수명을 지정하여 실행
 result <- test_tetrad_assumption(
   data = my_data,
   outcome = "Y_post",   # 사후 점수 (예: 국어)
@@ -37,11 +58,19 @@ result <- test_tetrad_assumption(
 )
 
 print(result)
-판정: 결과가 "ACCEPT H0"라면 해당 탐지변수들을 사용하여 aDID 분석을 수행할 수 있습니다.3. aDID 분석 수행Radjusted_did_analytic(
+
+판정: 결과가 "ACCEPT H0"라면 해당 탐지변수들을 사용하여 aDID 분석을 수행할 수 있습니다.
+
+3. aDID 분석 수행
+adjusted_did_analytic(
   G = "Treatment", 
   Y = "Y_post", 
   P = "Y_pre", 
   C = "C_math",   # 검증된 탐지변수 사용
   data = my_data
 )
-📊 분석 결과 요약 (Empirical Findings)본 연구에서 경기교육종단연구 자료를 분석한 결과는 다음과 같습니다 (analysis/case_study.R 참조).분석 모형추정 결과해석ANCOVA / 일반 DID유의한 부적(-) 효과식별 가정이 검증되지 않음 (잠재적 편향 가능성)Tetrad Test + aDID유의한 효과 없음가정 검정을 통해 타당성이 확인된 모형이러한 불일치는 식별 가정이 검증되지 않은 채 도출된 결론이 편향을 내포할 수 있음을 시사하며, 본 연구가 제안한 절차의 필요성을 강조합니다.📦 요구 사항 (Requirements)R version: 4.0.0 이상Dependencies: MASS (시뮬레이션용), dplyr, haven (데이터 처리용)Encoding: UTF-8📝 인용 (Citation)본 코드를 연구에 활용하실 경우, 아래 논문을 인용해 주시기 바랍니다.이상윤. (202X). 공통추세 가정 위배 시 보정된 이중차분법의 타당성 검증. [저널명], [권(호)], [페이지].Created by Sangyun Lee
+
+📦 요구 사항 (Requirements)
+R version: 4.0.0 이상
+Dependencies: MASS (시뮬레이션용), dplyr, haven (데이터 처리용)
+Encoding: UTF-8
