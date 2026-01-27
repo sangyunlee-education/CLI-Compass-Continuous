@@ -13,7 +13,7 @@
 ## 📂 저장소 구조 (Repository Structure)
 
 ```bash
-Metric-Compass/
+CLI-Compass-Continuous/
 ├── R/
 │   └── functions.R         # [핵심] Tetrad Test 및 aDID 추정 함수 정의 (Base R)
 ├── simulation/
