@@ -20,7 +20,7 @@ Metric-Compass/
 │   └── sim_study.R         # 몬테카를로 시뮬레이션 (제1종 오류율 및 검정력 검증)
 └── analysis/
     └── case_study.R        # 경기교육종단연구 데이터를 활용한 실증 분석 예시
-
+```
 
 ✨ 주요 기능 (Key Features)
 
