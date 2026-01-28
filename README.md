@@ -15,10 +15,10 @@
 
 ```bash
 CLI-Compass-Continuous/
-├── R/
+├── 1. functions/
 │   └── functions.R         # [핵심] Tetrad Test 및 aDID 추정 함수 정의 (Base R)
-├── simulation/
+├── 2. simulation/
 │   └── sim_study.R         # 몬테카를로 시뮬레이션 (제1종 오류율 및 검정력 검증)
-└── analysis/
-    └── case_study.R        # 경기교육종단연구 데이터를 활용한 실증 분석 예시
+└── 3. illustration/
+    └── illustration_study.R        # 경기교육종단연구 데이터를 활용한 실증 분석 예시
 ```
